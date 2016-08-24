@@ -41,6 +41,15 @@ describe Mixpanel::URI do
         "#{Mixpanel::Client::IMPORT_URI}/import?a=ey&c=see"
       )
     end
+
+    it 'should return the correct uri when hitting the "api" endpoint
+        directly' do
+      resource = 'api/engage'
+      params = { c: 'see', a: 'ey' }
+      Mixpanel::URI.mixpanel(resource, params).should eq(
+        "#{Mixpanel::Client::IMPORT_URI}/engage?a=ey&c=see"
+      )
+    end
   end
 
   describe '.encode' do

@@ -11,6 +11,11 @@ module Mixpanel
   class URI
     def self.mixpanel(resource, params)
       base = Mixpanel::Client.base_uri_for_resource(resource)
+      paths = File.split(resource)
+      if paths[0] == 'api'
+        paths.shift
+        resource = File.join(paths)
+      end
       "#{File.join([base, resource.to_s])}?#{encode(params)}"
     end
 

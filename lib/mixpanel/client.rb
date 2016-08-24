@@ -66,7 +66,7 @@ module Mixpanel
     def make_normal_request(resource)
       response = URI.get(@uri, @timeout)
 
-      if %w(export import).include?(resource) && @format != 'raw'
+      if %w(export import api).include?(resource) && @format != 'raw'
         response = %([#{response.split("\n").join(',')}])
       end
 
@@ -162,6 +162,8 @@ module Mixpanel
       if resource == 'export'
         DATA_URI
       elsif resource == 'import'
+        IMPORT_URI
+      elsif resource.start_with? 'api'
         IMPORT_URI
       else
         BASE_URI
