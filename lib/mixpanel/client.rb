@@ -108,7 +108,7 @@ module Mixpanel
           fail TimeoutError
         elsif response.code == 0
           # Could not get an http response, something's wrong
-          fail HTTPError, response.response_message
+          fail HTTPError, response.return_message
         else
           # Received a non-successful http response
           if response.body && response.body != ''
